@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de Relatividad</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+    .card {
+      background: #ffffff22;
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      margin: auto;
+      max-width: 500px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+    }
+    input {
+      width: 100px;
+    }
+    button {
+      background: #00bcd4;
+      color: white;
+      cursor: pointer;
+    }
+    .resultados {
+      margin-top: 20px;
+      background: #ffffff11;
+      border-radius: 10px;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Simulador de Teoría de la Relatividad</h1>
+
+  <div class="card">
+    <p>Ingresa una velocidad (fracción de la velocidad de la luz, c)</p>
+    <input type="number" id="velocidad" step="0.01" min="0" max="0.99" value="0.5"> c
+    <br>
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="resultados" id="resultados" style="display:none;">
+      <h3>Resultados:</h3>
+      <p><strong>Factor de Lorentz (γ):</strong> <span id="gamma"></span></p>
+      <p><strong>Dilatación del tiempo:</strong> <span id="tiempo"></span> × t</p>
+      <p><strong>Contracción de la longitud:</strong> <span id="longitud"></span> × L</p>
+      <p><strong>Aumento de masa:</strong> <span id="masa"></span> × m</p>
+    </div>
+  </div>
+
+  <script>
+    function calcular() {
+      const v = parseFloat(document.getElementById("velocidad").value);
+      const c = 1;
+      if (v >= c || v < 0) {
+        alert("La velocidad debe estar entre 0 y 0.99 c");
+        return;
+      }
+
+      const gamma = 1 / Math.sqrt(1 - v * v);
+      document.getElementById("gamma").innerText = gamma.toFixed(4);
+      document.getElementById("tiempo").innerText = gamma.toFixed(4);
+      document.getElementById("longitud").innerText = (1 / gamma).toFixed(4);
+      document.getElementById("masa").innerText = gamma.toFixed(4);
+      document.getElementById("resultados").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
